@@ -7,7 +7,7 @@ import ashwood_url from '../ThreeJs/textures/top_ashwood_mat.glb?url';
 import cedar_url from '../ThreeJs/textures/top_cedar_mat.glb?url';
 import plasticblack_url from '../ThreeJs/textures/top_plastic_black_mat.glb?url';
 import plasticwhite_url from '../ThreeJs/textures/top_plastic_white_mat.glb?url';
-import walnut_url from '../ThreeJs//models/prop_01.glb?url';
+import walnut_url from '../ThreeJs/textures/top_walnut_mat.glb?url';
 
 import leg_prop_1_url from '../ThreeJs/models/prop_01.glb?url';
 import leg_prop_2_url from '../ThreeJs/models/prop_02.glb?url';
