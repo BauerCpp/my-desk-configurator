@@ -113,7 +113,6 @@ class SceneManager {
 
         this.scene.add(this.table);
         this.table.translateX(-_width / 2)
-        // this.camera.position.setZ(_depth * 3)
         return this.table;
     }
 
