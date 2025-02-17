@@ -137,19 +137,23 @@ class SceneManager {
 
     updateTableTopMaterial = async (materialName: string) => {
         const _object = this.table.getObjectByName('TableTop');
-        _object.material.dispose();
 
-        if (this.materialName !== materialName)
+        if (_object)
         {
-            const loader = new GLTFLoader();
-            const materialURL = this.texturesURLs[materialName.toLowerCase()]
-            const gltf = await loader.loadAsync(materialURL);
-            _object.material = gltf.scene.children[0].material;
-            this.materialName = materialName;
-            this.material = gltf.scene.children[0].material.clone();
-        }
-        else{
-            _object.material = this.material;
+            _object.material.dispose();
+
+            if (this.materialName !== materialName)
+            {
+                const loader = new GLTFLoader();
+                const materialURL = this.texturesURLs[materialName.toLowerCase()]
+                const gltf = await loader.loadAsync(materialURL);
+                _object.material = gltf.scene.children[0].material;
+                this.materialName = materialName;
+                this.material = gltf.scene.children[0].material.clone();
+            }
+            else{
+                _object.material = this.material;
+            }
         }
     };
 
