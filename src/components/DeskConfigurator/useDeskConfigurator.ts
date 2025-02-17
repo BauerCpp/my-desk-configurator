@@ -2,6 +2,16 @@ import { useState, useEffect, useRef } from 'react';
 import SceneManager from '../ThreeJs/SceneManager';
 import { DeskConfiguration, defaultDeskConfiguration } from '../types/DeskConfiguration';
 
+import leg_model_url from '../ThreeJs/models/leg.glb?url'
+import ashwood_url from '../ThreeJs/textures/top_ashwood_mat.glb?url';
+import cedar_url from '../ThreeJs/textures/top_cedar_mat.glb?url';
+import plasticblack_url from '../ThreeJs/textures/top_plastic_black_mat.glb?url';
+import plasticwhite_url from '../ThreeJs/textures/top_plastic_white_mat.glb?url';
+import walnut_url from '../ThreeJs//models/prop_01.glb?url';
+
+import leg_prop_1_url from '../ThreeJs/models/prop_01.glb?url';
+import leg_prop_2_url from '../ThreeJs/models/prop_02.glb?url';
+
 interface UseDeskConfiguratorProps {
     onConfigurationChange?: (config: DeskConfiguration) => void;
     initialConfiguration?: DeskConfiguration;
@@ -15,19 +25,19 @@ const useDeskConfigurator = (props: UseDeskConfiguratorProps = {}) => {
     const sceneManagerRef = useRef<SceneManager | null>(null);
 
     useEffect(() => {
-        const legURL = '/models/leg.glb';
+        const legURL = leg_model_url;
         // const legProp1URL = '/models/prop_01.glb';
         // const legProp2URL = '/models/prop_02.glb';
         const texturesURLs = {
-            ashwood: '/textures/top_ashwood_mat.glb',
-            cedar: '/textures/top_cedar_mat.glb',
-            plasticblack: '/textures/top_plastic_black_mat.glb',
-            plasticwhite: '/textures/top_plastic_white_mat.glb',
-            walnut: '/textures/top_walnut_mat.glb',
+            ashwood: ashwood_url,
+            cedar: cedar_url,
+            plasticblack: plasticblack_url,
+            plasticwhite: plasticwhite_url,
+            walnut: walnut_url,
         };
         const legPropURLs = {
-            1: '/models/prop_01.glb',
-            2: '/models/prop_02.glb',
+            1: leg_prop_1_url,
+            2: leg_prop_2_url,
         };
 
         if (canvasRef.current) {
