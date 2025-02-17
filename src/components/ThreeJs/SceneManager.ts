@@ -481,7 +481,6 @@ class SceneManager {
 
                                 (child as any).morphTargetInfluences[0] = (depth - 300) / (1500 - 300); // Assuming length is the first morph target.
                                 child.geometry.computeBoundingBox();
-                                // (child as any).morphTargetInfluences[0] = 0
                             }
                         });
                     }
