@@ -28,8 +28,8 @@ const SizeControl: React.FC<SizeControlProps> = ({ label, value, onChange, min, 
                         }
                         else
                         {
-                            setSize(_value);
                             onChange(_value);
+                            setSize(_value);
                         }
                     }}
                 min={min}

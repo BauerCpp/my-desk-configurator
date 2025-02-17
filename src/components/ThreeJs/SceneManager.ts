@@ -55,8 +55,8 @@ class SceneManager {
         this.scene.background = new THREE.Color(0xeeeeee);
 
         // Camera
-        this.camera = new THREE.PerspectiveCamera(75, this.width / this.height, 0.1, 1000);
-        this.camera.position.set(2, 1.5, 2);  // Adjust initial camera position
+        this.camera = new THREE.PerspectiveCamera(75, this.width / this.height, 0.1, 100);
+        this.camera.position.set(0, 1.5, 0);  // Adjust initial camera position
         this.scene.add(this.camera);
 
         // Renderer
@@ -77,13 +77,11 @@ class SceneManager {
         const ambientLight = new THREE.AmbientLight(0x404040); // Soft white light
         this.scene.add(ambientLight);
 
-        const directionalLight = new THREE.DirectionalLight(0xffffff, 3);
-        directionalLight.position.set(0, 5, 5);
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 4);
+        directionalLight.position.set(5, 10, 10);
         directionalLight.castShadow = true; // Enable shadow casting
         this.scene.add(directionalLight);
 
-        const axesHelper = new THREE.AxesHelper( 1 );
-        this.scene.add( axesHelper );
 
         const planeGeometry = new THREE.PlaneGeometry(100, 100);
         const planeMaterial = new THREE.MeshStandardMaterial({
@@ -111,8 +109,10 @@ class SceneManager {
         this.tableTop = this.createTableTop(_width, _depth, material)
         this.updateDeskHeight(legHeight)
 
-        this.table.position.setX(-_width / 2)
+
         this.scene.add(this.table);
+        this.table.translateX(-_width / 2)
+        // this.camera.position.setZ(_depth * 3)
         return this.table;
     }
 
@@ -341,9 +341,8 @@ class SceneManager {
                     this.legProps.castShadow = true;
                     this.legProps.name = "Prop"; // Helpful for debugging and later selection.
                     this.legProps.instanceMatrix.setUsage(THREE.DynamicDrawUsage); // Important for updating matrices efficiently.
-
                     // this.legProps.computeBoundingSphere(); // Compute bounding sphere, helps with frustum culling
-                    this.table.add(this.legProps);
+                    this.table.attach(this.legProps);
                 }
             });
         }
@@ -384,33 +383,28 @@ class SceneManager {
         if (center.y !== 0) gltf_obj.translateY( center.y );
         if (center.z !== 0) gltf_obj.translateZ( center.z );
 
+        gltf_obj.position.add(this.table.position);
+
         let count = 0;
 
         for (let index = 0; index < 2; index++) {
-            let x = center.x + index * ( _width - this.leg_width ) ; // Example: Random X position between -1 and 1
+            let x = center.x + index * ( _width - this.leg_width );
             let z = center.z  - (150 / 1000) + this.propWidth;
             dummy.position.setX(x);
             dummy.position.x = dummy.position.x + this.leg_width / 2;
             for (let index2 = 0; index2 < 2; index2++) {
 
-            z += center.z + index2 *((depth - 75) / 1000 + this.propWidth) ; //
+                z += center.z + index2 *((depth - 75) / 1000 + this.propWidth) ; //
 
 
-            dummy.position.setZ(z);
-            dummy.position.y = center.y + this.propHeight / 2;
+                dummy.position.setZ(z);
+                dummy.position.y = center.y + this.propHeight / 2;
 
-            dummy.updateMatrix();
-            this.legProps.setMatrixAt(count, dummy.matrix);
-            // console.log('YYYY', offset, y)
+                dummy.updateMatrix();
+                this.legProps.setMatrixAt(count, dummy.matrix);
 
-            // x = _depth - (150 / 1000) - _offset; // Example: Random X position between -1 and 1
-            // z = 0; //
-            // y = 0; // Set y position, adjust as needed
-            // dummy.position.set(x, y, z);
-            // dummy.updateMatrix();
-            // prop.setMatrixAt(1, dummy.matrix);
-            count++;
-            sign*=-1;
+                count++;
+                sign*=-1;
             }
         }
 
@@ -516,8 +510,6 @@ class SceneManager {
     }
 
     async changeLegProp (propIndex: number) {
-        let index = 0;
-
         const prop = this.table.getObjectByName('Prop');
         this.table.remove(prop);
         this.legProps = null;
