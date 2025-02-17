@@ -195,10 +195,6 @@ class SceneManager {
                     mesh.morphTargetInfluences[1] = 0;
                     mesh.morphTargetInfluences[0] = 0;
                     mesh.material.metalness = 0.8;
-
-                    // 3. Translate *back* along the Z axis to achieve z=0 centering *relative to the morph target deformation*
-                    // mesh.translateX(-zOffset);
-                    // mesh.rotateY(Math.PI / 2);
                     mesh.geometry.computeBoundingBox()
                 }
             }
