@@ -1,0 +1,22 @@
+.control {
+    margin-bottom: 10px;
+}
+
+.control label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.control input[type="number"],
+.control select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.colorPreview {
+    width: 20px;
+    height: 20px;
+    border: 1px solid black;
+}
