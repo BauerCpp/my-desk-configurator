@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/Addons.js';
 import { OrbitControls } from 'three/examples/jsm/Addons.js';
 // import { defaultDeskConfiguration } from '../types/DeskConfiguration';
+
 import * as SkeletonUtils from 'three/addons/utils/SkeletonUtils.js';
 import { DeskConfiguration } from '../types/DeskConfiguration';
 const HEIGHT = 16;
