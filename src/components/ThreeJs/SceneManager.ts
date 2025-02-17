@@ -57,7 +57,7 @@ class SceneManager {
 
         // Camera
         this.camera = new THREE.PerspectiveCamera(75, this.width / this.height, 0.1, 100);
-        this.camera.position.set(0, 1.5, 0);  // Adjust initial camera position
+        this.camera.position.set(0, 3, 3);  // Adjust initial camera position
         this.scene.add(this.camera);
 
         // Renderer
@@ -123,6 +123,9 @@ class SceneManager {
 
         _tableTop.position.sub(new THREE.Vector3(-width / 2, -(HEIGHT / 1000) / 2, -depth / 2 + 150 / 1000));
 
+        this.deskWidth = width * 1000;
+        this.deskDepth = depth * 1000;
+
         _tableTop.name = 'TableTop'
         _tableTop.castShadow = true; // Important for shadows
         this.table.add(_tableTop);
@@ -158,6 +161,7 @@ class SceneManager {
     };
 
     resizeTableTop(width: number, depth: number) {
+
         if (this.tableTop)
         {
             this.table.remove(this.tableTop);
@@ -166,7 +170,10 @@ class SceneManager {
             this.tableTop.material.dispose();
         }
 
-        this.tableTop = this.createTableTop(width / 1000, depth / 1000, this.materialName);
+        const _width = width || this.deskWidth;
+        const _depth = depth || this.deskDepth;
+
+        this.tableTop = this.createTableTop(_width / 1000, _depth / 1000, this.materialName);
         this.updateDeskHeight(this.legHeight)
         this.table.add(this.tableTop);
     }
@@ -454,6 +461,7 @@ class SceneManager {
         {
             this.tableTop.position.setY((height  / 1000) + this.leg_offset_y);
             this.tableTop.position.sub(new THREE.Vector3(0, -(HEIGHT / 1000) / 2, 0))
+            this.legHeight = height;
         }
     }
 

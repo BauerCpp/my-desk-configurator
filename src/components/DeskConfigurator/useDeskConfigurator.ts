@@ -85,7 +85,7 @@ const useDeskConfigurator = (props: UseDeskConfiguratorProps = {}) => {
     const setWidth = (width: number) => {
         if (sceneManagerRef.current) {
             sceneManagerRef.current.updateLegsWidth(width);
-            sceneManagerRef.current.resizeTableTop(width, configuration.depth);
+            sceneManagerRef.current.resizeTableTop(width, null);
         }
         setConfiguration(prev => ({ ...prev, width }));
     };
@@ -93,16 +93,16 @@ const useDeskConfigurator = (props: UseDeskConfiguratorProps = {}) => {
     const setDepth = (depth: number) => {
         if (sceneManagerRef.current) {
             sceneManagerRef.current
-                .updateLegDepth(configuration.depth)
+                .updateLegDepth(depth)
                 .then(
-                    () => sceneManagerRef.current.resizeTableTop(configuration.width, depth)
+                    () => sceneManagerRef.current.resizeTableTop(null, depth)
                 );
         }
         setConfiguration(prev => ({ ...prev, depth }));
     };
 
     const setLegHeight = (legHeight: number) => {
-        sceneManagerRef.current.updateLegHeight(configuration.legHeight);
+        sceneManagerRef.current.updateLegHeight(legHeight);
         setConfiguration(prev => ({ ...prev, legHeight }));
     };
 
